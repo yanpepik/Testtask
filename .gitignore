@@ -1,0 +1,59 @@
+# macOS
+.DS_Store
+
+# Xcode project workspace
+*.xcworkspace/xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# Build artifacts
+DerivedData/
+build/
+*.xcarchive
+
+# SwiftPM (if used)
+.build/
+.swiftpm/
+
+# CocoaPods (if used)
+Pods/
+Podfile.lock
+
+# Carthage (if used)
+Carthage/
+
+# Fastlane (if used)
+fastlane/report.xml
+fastlane/test_output/
+fastlane/screenshots/
+fastlane/Preview.html
+
+# Symbolic Links / Temp
+*.moved-aside
+*.swp
+*.lock
+*.tmp
+*.log
+
+# IDEs
+.idea/
+.vscode/
+
+# Environment files
+.env
+*.env.*
+
+# Xcode automatic backup files
+*.xcuserdatad
+
+# SwiftUI Preview
+*.canvas
+
+# Preview Content auto-generated cache (from Assets)
+*.xcassets/Preview\ Content/
+
+# User-specific config
+TesttaskApp.xcodeproj/project.xcworkspace/xcuserdata/
+TesttaskApp.xcodeproj/xcuserdata/
+
