@@ -3,11 +3,11 @@ import Foundation
 enum SignupEndpoint: EndpointProtocol {
     case getToken
     case registerUser(dto: SignupUserDto)
-    
+
     var scheme: String { "https" }
-    
+
     var host: String { "frontend-test-assignment-api.abz.agency" }
-    
+
     var path: String {
         switch self {
         case .registerUser:
@@ -16,7 +16,7 @@ enum SignupEndpoint: EndpointProtocol {
             return "/api/v1/token"
         }
     }
-    
+
     var headers: [String: String]? {
         switch self {
         case .registerUser(let dto):
@@ -30,9 +30,9 @@ enum SignupEndpoint: EndpointProtocol {
             ]
         }
     }
-    
+
     var parameters: [URLQueryItem]? { nil }
-    
+
     func multipartBody() throws -> (body: Data, boundary: String)? {
         switch self {
         case .registerUser(let dto):
@@ -42,10 +42,10 @@ enum SignupEndpoint: EndpointProtocol {
                 .addField(name: "phone", value: dto.phone)
                 .addField(name: "position_id", value: "\(dto.positionId)")
                 .addFile(fieldName: "photo", fileName: "user.jpg", mimeType: "image/jpeg", fileData: dto.photo)
-            
+
             let (body, _, boundary) = try builder.build()
             return (body, boundary)
-            
+
         default:
             return nil
         }

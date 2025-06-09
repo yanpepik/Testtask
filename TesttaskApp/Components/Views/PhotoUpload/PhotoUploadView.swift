@@ -11,7 +11,7 @@ struct PhotoUploadView: View {
                 Text(model.title)
                     .font(FontFamily.Nunito.regular.font(size: 16))
                     .foregroundColor(mainColor)
-
+                
                 Spacer()
                 
                 SecondaryTextButton(

@@ -33,8 +33,6 @@ struct UserCardView: View {
                     Text(model.phone)
                         .font(FontFamily.Nunito.regular.font(size: 14))
                         .foregroundColor(.black.opacity(0.87))
-                    
-                    Divider()
                 }
                 
                 Spacer(minLength: 0)

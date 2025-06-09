@@ -8,12 +8,12 @@ protocol SignupInteractorProtocol {
 final class SignupInteractor: SignupInteractorProtocol {
     //MARK: - Properties
     private let networkService: NetworkServiceProtocol
-    
+
     //MARK: - Initialization
     init(networkService: NetworkServiceProtocol = NetworkService()) {
         self.networkService = networkService
     }
-    
+
     //MARK: - Methods
     func fetchToken() async throws -> String {
         let request = Request<Empty>(
@@ -23,13 +23,13 @@ final class SignupInteractor: SignupInteractorProtocol {
         let response: Response<TokenResponse> = try await networkService.performRequest(request: request)
         return response.body.token
     }
-    
+
     func submitSignupForm(dto: SignupUserDto) async throws {
         let request = Request<Empty>(
             endpoint: SignupEndpoint.registerUser(dto: dto),
             method: .POST
         )
-        
+
         do {
             let _: Response<Empty> = try await networkService.performRequest(request: request)
         } catch let error as NetworkError {

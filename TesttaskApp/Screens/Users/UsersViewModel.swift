@@ -63,11 +63,9 @@ final class UsersViewModel: UsersViewModelProtocol {
     }
 
     func loadMoreIfNeeded(currentIndex index: Int) {
-        let thresholdIndex = users.count - 1
-        guard index == thresholdIndex else { return }
-
-        let isFullPage = users.count % usersPerPage == 0
-        guard isFullPage && !isPaginating && currentPage <= totalPages else { return }
+        let thresholdIndex = users.count - 3
+        guard index >= thresholdIndex else { return }
+        guard !isPaginating, currentPage <= totalPages else { return }
 
         fetchUsers(reset: false)
     }

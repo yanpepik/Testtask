@@ -3,7 +3,7 @@ import SwiftUI
 struct BottomBar: View {
     // MARK: - Properties
     @Binding var selectedTab: BottomBarModel
-    
+
     // MARK: - Body
     var body: some View {
         HStack {

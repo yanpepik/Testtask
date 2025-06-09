@@ -5,13 +5,13 @@ struct PrimaryTextField: View {
     @FocusState private var isFocused: Bool
     @Binding private var text: String
     private let model: Model
-    
+
     //MARK: - Initialization
     init(model: Model, text: Binding<String>) {
         self.model = model
         self._text = text
     }
-    
+
     //MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -23,7 +23,7 @@ struct PrimaryTextField: View {
                     .background(.white)
                     .offset(y: isFloating ? -12 : 0)
                     .animation(.easeInOut(duration: 0.2), value: isFloating)
-                
+
                 TextField("", text: $text)
                     .focused($isFocused)
                     .padding(.top, 16)
@@ -41,7 +41,7 @@ struct PrimaryTextField: View {
                         case .email:
                             text = text.lowercased()
                         }
-                        
+
                         if let limit = model.characterLimit, text.count > limit {
                             text = String(text.prefix(limit))
                         }
@@ -52,7 +52,7 @@ struct PrimaryTextField: View {
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(fieldColor, lineWidth: 1)
             )
-            
+
             if hasError {
                 Text(model.errorText ?? "")
                     .font(FontFamily.Nunito.regular.font(size: 12))
@@ -65,27 +65,16 @@ struct PrimaryTextField: View {
         }
         .animation(.easeInOut(duration: 0.2), value: isFocused)
     }
-    
+
     private var isFloating: Bool {
         isFocused || !text.isEmpty
     }
-    
+
     private var hasError: Bool {
         !(model.errorText?.isEmpty ?? true)
     }
-    
+
     private var fieldColor: Color {
         hasError ? .errorRed : isFocused ? .functionalCyan : .black.opacity(0.48)
-    }
-}
-
-extension View {
-    func hideKeyboardOnTap() -> some View {
-        self.onTapGesture {
-            UIApplication.shared.sendAction(
-                #selector(UIResponder.resignFirstResponder),
-                to: nil, from: nil, for: nil
-            )
-        }
     }
 }

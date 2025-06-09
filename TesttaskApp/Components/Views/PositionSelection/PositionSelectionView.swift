@@ -4,14 +4,14 @@ struct PositionSelectionView: View {
     //MARK: - Properties
     @Binding var selected: Position
     @State private var pressedPosition: Position?
-
+    
     //MARK: - Body
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(LocalizedStringResource(.init(.localization.signup.positionTitle)))
-                .font(.title3)
-                .bold()
-
+                .font(FontFamily.Nunito.regular.font(size: 18))
+                .foregroundColor(.black.opacity(0.87))
+            
             ForEach(Position.allCases, id: \.self) { position in
                 HStack {
                     RadioCircle(
@@ -31,10 +31,11 @@ struct PositionSelectionView: View {
                                 pressedPosition = nil
                             }
                     )
-
+                    
                     Text(position.localized)
-                        .font(.body)
-
+                        .font(FontFamily.Nunito.regular.font(size: 16))
+                        .foregroundColor(.black.opacity(0.87))
+                    
                     Spacer()
                 }
                 .contentShape(Rectangle())

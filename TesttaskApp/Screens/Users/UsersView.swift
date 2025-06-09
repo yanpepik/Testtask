@@ -17,32 +17,34 @@ struct UsersView<ViewModel: UsersViewModelProtocol & ObservableObject>: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     if viewModel.isInitialLoading {
-                        Spinner(isAnimating: true)
-                            .padding(.top, 32)
+
                     } else if viewModel.users.isEmpty {
                         UsersEmpty()
                             .padding(.top, 64)
                     } else {
-                        ForEach(viewModel.users.indices, id: \.self) { index in
-                            UserCardView(model: userCardModel(for: viewModel.users[index]))
-                                .onAppear {
-                                    viewModel.loadMoreIfNeeded(currentIndex: index)
+                        ForEach(Array(viewModel.users.enumerated()), id: \.offset) { index, user in
+                            VStack(spacing: 0) {
+                                UserCardView(model: userCardModel(for: user))
+                                    .onAppear {
+                                        viewModel.loadMoreIfNeeded(currentIndex: index)
+                                    }
+                                if index != viewModel.users.count - 1 {
+                                    Divider()
+                                        .padding(.leading, 76)
+                                        .padding(.trailing, 16)
                                 }
-                        }
-
-                        if viewModel.isPaginating {
-                            Spinner(isAnimating: true)
-                                .padding(.vertical, 16)
+                            }
                         }
                     }
                 }
+                .padding(.top, 8)
                 .padding(.bottom, 32)
             }
             .refreshable {
                 viewModel.refresh()
             }
         }
-        .background(.white)
+        .background(Color.white)
         .onAppear {
             viewModel.fetchUsers(reset: false)
         }

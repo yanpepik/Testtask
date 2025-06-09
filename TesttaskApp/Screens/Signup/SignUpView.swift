@@ -110,7 +110,7 @@ struct SignupView<ViewModel: SignupViewModelProtocol & ObservableObject>: View {
 
     private var failedButtonModel: PrimaryFilledButton.Model {
         .init(
-            title: viewModel.signupButtonTitle,
+            title: viewModel.failureButtonTitle,
             isEnabled: .constant(true),
             action: viewModel.dismissStatus
         )
